@@ -303,7 +303,7 @@ function ast2sat(n::TermNumber, variables, additional, smt_cache)
 	x = Float64(n.value)
 	x_str = string(x)
 
-	if !contains(x_str, "e")
+	if !occursin("e", x_str)
 		return x
 	else
 		@warn "$(x) contains scientific notation. adding shield variable."
