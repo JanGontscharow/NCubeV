@@ -1,12 +1,99 @@
 using Satisfiability
 Sat = Satisfiability
 
+
+"""
+AST-to-SMT translation utilities
+--------------------------------
+
+Translate NCubeV AST nodes to solver-native expressions used by SMT backends.
+The functions here are solver-agnostic and produce intermediate `Formula`
+structures ready to be consumed by backend-specific translators (e.g., Z3 in
+`SMTInterface/Z3/AST2Z3.jl`).
+
+Key responsibilities:
+- Construct input/output box constraints from `NormalizedQuery`
+- Flatten piecewise-linear conjunctions (`PwlConjunction`) into AND terms
+- Convert semi-linear constraints to linear atoms
+
+See also:
+- `SMTInterface.StarFilter` for counterexample filtering logic (Lemma 12)
+- `SMTInterface.Z3.AST2Z3` for backend-specific lowering
+"""
+function ast2sat(q :: NormalizedQuery, variables, additional)
+	conjunction = Formula[]
+	num_inputs = length(q.input_bounds)
+	num_outputs = length(q.output_bounds)
+	for (i,b) in enumerate(q.input_bounds)
+		push!(conjunction, Atom(LessEq, b[1], Variable("x"*string(i),nothing,i)))
+		push!(conjunction, Atom(LessEq, Variable("x"*string(i),nothing,i), b[end]))
+	end
+	for (i,b) in enumerate(q.output_bounds)
+		push!(conjunction, Atom(LessEq,b[1], Variable("x"*string(num_inputs + i),nothing,num_inputs + i)))
+		push!(conjunction, Atom(LessEq, Variable("x"*string(num_inputs + i),nothing,num_inputs + i), b[end]))
+	end
+	encoded_input =pwl2term(q.input_constraints)
+	if !isnothing(encoded_input)
+		push!(conjunction, encoded_input)
+	end
+	disjuntion = Formula[]
+	for c in q.mixed_constraints
+		push!(disjuntion, pwl2term(c))
+	end
+	if length(disjuntion) > 1
+		push!(conjunction, CompositeFormula(Or,disjuntion))
+	else
+		push!(conjunction, disjuntion[1])
+	end
+	if length(conjunction)==1
+		return ast2sat(conjunction[1], variables, additional)
+	else
+		return ast2sat(CompositeFormula(And,conjunction), variables, additional)
+	end
+end
+
+"""
+	pwl2term(pwl::PwlConjunction) -> Union{Formula,Nothing}
+
+Flatten a piecewise-linear conjunction into a single formula by combining
+variable bounds, linear constraints, and semi-linear constraints as an AND.
+Returns `nothing` if the conjunction is empty.
+"""
+
+"""
+	ast2sat(semi::SemiLinearConstraint, variables, additional)
+
+Convert a semi-linear constraint (linear part plus weighted approx queries)
+to an SMT atom by substituting the semi-linear components into the
+left-hand side term and creating a strict/weak inequality depending on
+`semi.equality`.
+
+Notes:
+- Coefficients are rationalized to improve solver stability.
+"""
+function ast2sat(semi :: SemiLinearConstraint, variables, additional)
+	term = TermNumber(0.0)
+	for (i,c) in enumerate(semi.coefficients)
+		term = CompositeTerm(Add, Term[term, rationalize(Int32,BigFloat(c)) * Variable("x"*string(i),nothing,i)])
+	end
+	for (approx_query, coeff) in semi.semilinears
+		term = CompositeTerm(Add, Term[term, rationalize(Int32,BigFloat(coeff)) * approx_query.term])
+	end
+	if semi.equality
+		return ast2sat(Atom(LessEq, term, rationalize(Int32,BigFloat(semi.bias))), variables, additional)
+	else
+		return ast2sat(Atom(Less, term, rationalize(Int32,BigFloat(semi.bias))), variables, additional)
+	end
+end
+
+
+
 # TODO(steuber): Floating Point Correctness?
-function ast2smt(f :: CompositeFormula, variables, additional, smt_cache=Dict())
+function ast2sat(f :: CompositeFormula, variables, additional, smt_cache=Dict())
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
-	arguments = map(x -> ast2smt(x, variables, additional, smt_cache), f.args)
+	arguments = map(x -> ast2sat(x, variables, additional, smt_cache), f.args)
 	res = @match f.connective begin
 		Not => Sat.not(arguments[1])
 		And => Sat.and(arguments...)
@@ -18,7 +105,7 @@ function ast2smt(f :: CompositeFormula, variables, additional, smt_cache=Dict())
 	smt_cache[f] = res
 	return res
 end
-function ast2smt(f :: TrueAtom, variables, additional, smt_cache)
+function ast2sat(f :: TrueAtom, variables, additional, smt_cache)
 	@satvariable(t, Bool)
 	if haskey(smt_cache, f)
 		return smt_cache[f]
@@ -27,7 +114,7 @@ function ast2smt(f :: TrueAtom, variables, additional, smt_cache)
 	smt_cache[f] = res
 	return res
 end
-function ast2smt(f :: FalseAtom, variables, additional, smt_cache)
+function ast2sat(f :: FalseAtom, variables, additional, smt_cache)
 	@satvariable(t, Bool)
 	if haskey(smt_cache, f)
 		return smt_cache[f]
@@ -37,20 +124,20 @@ function ast2smt(f :: FalseAtom, variables, additional, smt_cache)
 	return res
 end
 """
-	ast2smt(f::LinearConstraint, variables, additional, smt_cache)
+	ast2sat(f::LinearConstraint, variables, additional, smt_cache)
 
 Encode a linear (or weakly linear) constraint `A*x [</<=] b` as a Sat
 comparison. Coefficients and bias are rationalized for stability.
 """
 #TODO(steuber): FLOAT INCORRECTNESS
-function ast2smt(f :: LinearConstraint, variables, additional, smt_cache=Dict())
+function ast2sat(f :: LinearConstraint, variables, additional, smt_cache=Dict())
 	
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
 	
-	coeff = map(c -> ast2smt(TermNumber(c), variables, additional, smt_cache), f.coefficients)
-	bias = ast2smt(TermNumber(f.bias), variables, additional, smt_cache)
+	coeff = map(c -> ast2sat(TermNumber(c), variables, additional, smt_cache), f.coefficients)
+	bias = ast2sat(TermNumber(f.bias), variables, additional, smt_cache)
 	n = length(coeff) # variables may have more entries than coefficients (input constraints)
 
 
@@ -70,11 +157,11 @@ function ast2smt(f :: LinearConstraint, variables, additional, smt_cache=Dict())
 end
 
 """
-	ast2smt(t::LinearTerm, variables, additional, smt_cache)
+	ast2sat(t::LinearTerm, variables, additional, smt_cache)
 
 Lower a linear term into a Sat arithmetic expression.
 """
-function ast2smt(t :: LinearTerm, variables, additional, smt_cache)
+function ast2sat(t :: LinearTerm, variables, additional, smt_cache)
 	
 	if haskey(smt_cache, t)
 		return smt_cache[t]
@@ -82,7 +169,7 @@ function ast2smt(t :: LinearTerm, variables, additional, smt_cache)
 
 	#@info "linear-term: $t"
 
-	coeff = map(c -> ast2smt(TermNumber(c), variables, additional, smt_cache), t.coefficients)
+	coeff = map(c -> ast2sat(TermNumber(c), variables, additional, smt_cache), t.coefficients)
 	for c in coeff
 		if isa(c, Sat.NumericExpr)
 			c = c.value
@@ -91,7 +178,7 @@ function ast2smt(t :: LinearTerm, variables, additional, smt_cache)
 	
 	#@info "coeff: $coeff"
 	
-	bias = ast2smt(TermNumber(t.bias), variables, additional, smt_cache)
+	bias = ast2sat(TermNumber(t.bias), variables, additional, smt_cache)
 	n = length(coeff) # variables may have more entries than coefficients (input constraints)
 	
 	#@info "vec: $(coeff .* variables[1:n])"
@@ -117,30 +204,30 @@ function ast2smt(t :: LinearTerm, variables, additional, smt_cache)
 end
 
 """
-	ast2smt(f::ApproxNode, ...)
+	ast2sat(f::ApproxNode, ...)
 
 Forward translation to the underlying formula carried by an approximation node.
 """
-function ast2smt(f :: ApproxNode, variables, additional, smt_cache)
+function ast2sat(f :: ApproxNode, variables, additional, smt_cache)
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
-	res = ast2smt(f.formula, variables, additional, smt_cache)
+	res = ast2sat(f.formula, variables, additional, smt_cache)
 	smt_cache[f] = res
 	return res
 end
 """
-	ast2smt(f::Atom, ...)
+	ast2sat(f::Atom, ...)
 
 Translate atomic comparisons by recursively lowering both sides and applying
 the respective Sat comparator.
 """
-function ast2smt(f :: Atom, variables, additional, smt_cache=Dict())
+function ast2sat(f :: Atom, variables, additional, smt_cache=Dict())
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
-	termLeft = ast2smt(f.left, variables, additional, smt_cache)
-	termRight = ast2smt(f.right, variables, additional, smt_cache)
+	termLeft = ast2sat(f.left, variables, additional, smt_cache)
+	termRight = ast2sat(f.right, variables, additional, smt_cache)
 	res = @match f.comparator begin
 		Less => termLeft < termRight
 		LessEq => termLeft <= termRight
@@ -154,7 +241,7 @@ function ast2smt(f :: Atom, variables, additional, smt_cache=Dict())
 end
 
 
-function smt_pow(base, exp, variables=[], additional=[], smt_cache=Dict())
+function ast2sat_smt_pow(base, exp, variables=[], additional=[], smt_cache=Dict())
 	@assert isa(exp, TermNumber) "Exponent must be a TermNumber."
 	@assert isa(base, TermNumber) || isa(base, Variable) "Base must be a TermNumber, Variable."
 	
@@ -163,9 +250,9 @@ function smt_pow(base, exp, variables=[], additional=[], smt_cache=Dict())
 
 	if den == 1
 		if isa(base, TermNumber)
-			return ast2smt(base^exp, variables, additional, smt_cache)
+			return ast2sat(base^exp, variables, additional, smt_cache)
 		else
-			var = ast2smt(base, variables, additional, smt_cache)
+			var = ast2sat(base, variables, additional, smt_cache)
 			if num > 0
 				# xⁿ = x ⋅ x ⋯ x
 				return foldl(*, fill(var, num))
@@ -183,17 +270,17 @@ function smt_pow(base, exp, variables=[], additional=[], smt_cache=Dict())
 end
 
 """
-	ast2smt(f::CompositeTerm, ...)
+	ast2sat(f::CompositeTerm, ...)
 
 Handle arithmetic combinations Add/Sub/Mul/Div/Pow/Neg. For non-integer
 exponents, guards restrict the domain to non-negative and fall back to 0 otherwise.
 """
-function ast2smt(f :: CompositeTerm, variables, additional, smt_cache)
+function ast2sat(f :: CompositeTerm, variables, additional, smt_cache)
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
 	if f.operation ≠ Pow
-		arguments = map(x -> ast2smt(x, variables, additional, smt_cache), f.args)
+		arguments = map(x -> ast2sat(x, variables, additional, smt_cache), f.args)
 		res = @match f.operation begin
 			Add => +(arguments...)
 			Sub => -(arguments...)
@@ -203,16 +290,16 @@ function ast2smt(f :: CompositeTerm, variables, additional, smt_cache)
 		end
 	else
 		@assert length(f.args) == 2 "Pow operation requires exactly two arguments."
-		res = smt_pow(f.args..., variables, additional, smt_cache)
+		res = ast2sat_smt_pow(f.args..., variables, additional, smt_cache)
 	end
 	
 	smt_cache[f] = res
 	return res
 end
-function ast2smt(v :: Variable, variables, additional, smt_cache)
+function ast2sat(v :: Variable, variables, additional, smt_cache)
 	return variables[v.position]
 end
-function ast2smt(n::TermNumber, variables, additional, smt_cache)
+function ast2sat(n::TermNumber, variables, additional, smt_cache)
 	x = Float64(n.value)
 	x_str = string(x)
 
