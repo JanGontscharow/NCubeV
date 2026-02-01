@@ -22,6 +22,8 @@ module SMTInterface
 	import ..Config.SMT_SOLVER
 	import ..Config.TIMER
 
+	using Satisfiability: Z3 as SatZ3, Solver as SatSolver
+
 	export smt_context, nl_feasible, nl_feasible_init
 
 	USE_CORES = true
@@ -38,6 +40,7 @@ module SMTInterface
 
 
 	include("AST2SMT.jl")
+	include("AST2Sat.jl")
 	include("Base.jl")
 	include("StarFilter.jl")
 

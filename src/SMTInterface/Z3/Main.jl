@@ -1,4 +1,5 @@
 using Z3
+const Solver = Z3.Solver
 
 #=
 Z3 backend
