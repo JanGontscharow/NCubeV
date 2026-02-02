@@ -24,7 +24,7 @@ module SMTInterface
 
 	using Satisfiability: Z3 as SatZ3, Solver as SatSolver
 
-	export smt_context, nl_feasible, nl_feasible_init
+	export smt_context, nl_feasible, nl_feasible_init, ast2sat
 
 	USE_CORES = true
 
@@ -72,14 +72,44 @@ module SMTInterface
 				end
 			end
 			
-			res = smt_internal_check(s, vars)
+			res1 = smt_internal_check(s, vars)
+			#-----------------------------
+			additional = []
+			@satvariable(x[1:length(variables)], Real)
+			cons_trans = map(con -> ast2sat(con, x, additional, Dict()), constraints)
+			expr = Sat.and(cons_trans...) #∧
+			#	Sat.and([c ⟹ con for (c,con) in zip(C, cons_trans)])
+			#expr = Sat.and([c ⟹ con for (c,con) in zip(C, cons_trans)])
+			
+			!isempty(additional) && (expr = expr ∧ Satisfiability.and(additional...)) 
+
+			# If expr simplified to a native Bool, wrap it back into an SMT expression
+			if expr isa Bool
+				expr = Satisfiability.__wrap_const(expr)
+			end
+
+			res = sat!(expr, solver=SatZ3(), logic="QF_NRA")
+			if smt_internal_is_sat(res1) && (res != :SAT)
+				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
+				@show constraints
+				@show res
+			elseif smt_internal_is_unsat(res1) && (res == :SAT)
+				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
+				@show constraints
+				@show res
+				@show expr
+				#@assert false "SMT and Sat solver results disagree."
+			else
+				println("[nl_feasible] SMT and Sat solver results agree $(res).")
+			end
+	
 			@timeit TIMER "SMTprep" begin
 			#conflicts = []
-			if smt_internal_is_sat(res)
+			if res == :SAT
 				if print_model
 					smt_print_model(s)
 				end
-			elseif !smt_internal_is_unsat(res)
+			elseif res != :UNSAT
 				print_msg("[SMT] SMT returned status: ", res)
 			else # unsat
 				#print_msg("[SMT] Conflict:")
@@ -99,7 +129,7 @@ module SMTInterface
 
 			return res
 		end
-		return !smt_internal_is_unsat(res)
+		return res != :UNSAT
 	end
 
 
@@ -149,17 +179,17 @@ module SMTInterface
 
 			res = sat!(expr, solver=SatZ3(), logic="QF_LRA")
 			if smt_internal_is_sat(res1) && (res != :SAT)
-				@warn "[SMTInterface] Discrepancy between SMT and Sat solver results."
+				@warn "[lin_feasible] Discrepancy between SMT and Sat solver results."
 				@show constraints
 				@show res
 			elseif smt_internal_is_unsat(res1) && (res == :SAT)
-				@warn "[SMTInterface] Discrepancy between SMT and Sat solver results."
+				@warn "[lin_feasible] Discrepancy between SMT and Sat solver results."
 				@show constraints
 				@show res
 				@show expr
 				@assert false "SMT and Sat solver results disagree."
 			else
-				println("[SMTInterface] SMT and Sat solver results agree $(res).")
+				#println("[lin_feasible] SMT and Sat solver results agree $(res).")
 			end
 			
 			@timeit TIMER "SMTprep" begin
