@@ -1,0 +1,1594 @@
+        Info Packages marked with ⌃ and ⌅ have new versions available. Those with ⌃ may be upgradable, but those with ⌅ are restricted by compatibility constraints from upgrading.
+     Testing Running tests...
+[CMD] Using SMT solver: Z3
+[CMD] Using verifier: NNEnum
+[CMD] Parsed initial query: NCubeV.AST.Query(((-1.0*x1<0.0&((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0&-1.0*x1<=0.0&1.0*x1<=100.0&-1.0*x2<=200.0&1.0*x2<=200.0&-1.0*x3<=100.0&1.0*x3<=100.0)->(-1.0*x3<=-100.0|(-1.0*x3<=100.0&1.0*x3<100.0&(1.0*x3<0.0|-1.0*x3<0.0)&((((-1.0*x3<0.0&1.0*x20.1*x3<0.0)|(1.0*x3<0.0&-1.0*x2-0.1*x3<0.0)|(-1.0*x3<0.0&-1.0*x2<0.0)|(1.0*x3<0.0&1.0*x2<0.0))&((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0)|(((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0&((-2.0*x3<0.0&((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0)|(2.0*x3<0.0&((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0)))))|(1.0*x3<=0.0&-1.0*x3<=0.0&((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0))), Set(NCubeV.AST.Variable[rAccpost, rVel, rPos]), 2, 1, Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}(), Vector{Float64}[])
+[CMD] SMT Timeout: 10s
+[CTRL] Iterating over conjunctions...
+[APPROX] Trying to build approximation...
+[APPROX] Generating expression for (rVel^2.0)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost^2.0)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rPos)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rVel)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Approximation Bounds: Vector{Float64}[]
+[APPROX] Approximations: Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}()
+[APPROX] Approximation is ready
+[SKELETON] Adding linear dependency constraint
+Float32[-1.0, 0.0, 0.0]+0.0<0.0 -> -1.0*x1<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=-100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.00099999999999
+-100.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.00099999999999
+100.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -1.0*x3<=100.0
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<100.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00099999999999
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -1.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<0.0 -> Float32[0.0, -1.0, 0.0]+0.0<=200.0
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x2<0.0 -> Float32[0.0, 1.0, 0.0]+0.0<=200.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-2.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.00099999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 3
+┌ Warning: [nl_feasible] Discrepancy between SMT and Sat solver results.
+└ @ NCubeV.SMTInterface ~/projects/NCubeV/src/SMTInterface/Main.jl:99
+constraints = NCubeV.AST.Formula[-1.0*x1<=0.0, 1.0*x1<=16.38, -1.0*x2<=73.19, 1.0*x2<=0.0, -1.0*x3<=0.0, 1.0*x3<=100.0, -1.0*x1<0.0, -1.0*x1<=0.0, 1.0*x1<=100.0, -1.0*x2<=200.0, 1.0*x2<=200.0, -1.0*x3<=100.0, 1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=0.0, -1.0*x3<0.0, -1.0*x2-0.1*x3<=0.0, 1.0*x20.1*x3<=0.0, 1.0*x2<=0.0, 1.0*x2<0.0, -2.0*x3<0.0, -2.0*x3<=0.0, -1.0*x3<0.0, -1.0*x3<=0.0, ((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0, ((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0, !(((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0), ((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0, !(((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0)]
+res = :SAT
+┌ Warning: [nl_feasible] Discrepancy between SMT and Sat solver results.
+└ @ NCubeV.SMTInterface ~/projects/NCubeV/src/SMTInterface/Main.jl:99
+constraints = NCubeV.AST.Formula[-1.0*x1<=0.0, 1.0*x1<=16.38, -1.0*x2<=73.19, 1.0*x2<=0.0, -1.0*x3<=0.0, 1.0*x3<=100.0, -1.0*x1<0.0, -1.0*x1<=0.0, 1.0*x1<=100.0, -1.0*x2<=200.0, 1.0*x2<=200.0, -1.0*x3<=100.0, 1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=0.0, -1.0*x3<0.0, -1.0*x2-0.1*x3<=0.0, 1.0*x20.1*x3<=0.0, 1.0*x2<=0.0, 1.0*x2<0.0, -2.0*x3<0.0, -2.0*x3<=0.0, -1.0*x3<0.0, -1.0*x3<=0.0, -1.0*x1-2.0*x2<=200.0, 1.0*x11.12*x20.04*x3<=30.75, -1.0*x1-2.05*x20.11*x3<250.15, -228.84*x1200.0*x2-16.97*x3<=1373.25, -228.84*x1200.0*x2-16.97*x3<1373.25, 1.0*x11.1*x2<=0.0, ((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0, ((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0, !(((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0), ((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0, !(((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0)]
+res = :SAT
+┌ Warning: [nl_feasible] Discrepancy between SMT and Sat solver results.
+└ @ NCubeV.SMTInterface ~/projects/NCubeV/src/SMTInterface/Main.jl:99
+constraints = NCubeV.AST.Formula[-1.0*x1<=0.0, 1.0*x1<=16.38, -1.0*x2<=73.19, 1.0*x2<=0.0, -1.0*x3<=0.0, 1.0*x3<=100.0, -1.0*x1<0.0, -1.0*x1<=0.0, 1.0*x1<=100.0, -1.0*x2<=200.0, 1.0*x2<=200.0, -1.0*x3<=100.0, 1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=0.0, -1.0*x3<0.0, -1.0*x2-0.1*x3<=0.0, 1.0*x20.1*x3<=0.0, 1.0*x2<=0.0, 1.0*x2<0.0, -2.0*x3<0.0, -2.0*x3<=0.0, -1.0*x3<0.0, -1.0*x3<=0.0, -1.0*x1-2.0*x2<=200.0, 1.0*x11.12*x20.04*x3<=30.75, -1.0*x1-2.05*x20.11*x3<250.15, -228.84*x1200.0*x2-16.97*x3<=1373.25, -228.84*x1200.0*x2-16.97*x3<1373.25, 1.0*x11.1*x2<=0.0, ((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0, ((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0, !(((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0), !(((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0), !(((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0)]
+res = :SAT
+.┌ Warning: [nl_feasible] Discrepancy between SMT and Sat solver results.
+└ @ NCubeV.SMTInterface ~/projects/NCubeV/src/SMTInterface/Main.jl:93
+constraints = NCubeV.AST.Formula[-1.0*x1<=0.0, 1.0*x1<=16.38, -1.0*x2<=73.19, 1.0*x2<=0.0, -1.0*x3<=0.0, 1.0*x3<=100.0, -1.0*x1<0.0, -1.0*x1<=0.0, 1.0*x1<=100.0, -1.0*x2<=200.0, 1.0*x2<=200.0, -1.0*x3<=100.0, 1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=100.0, 1.0*x3<100.0, -1.0*x3<=0.0, -1.0*x3<0.0, -1.0*x2-0.1*x3<=0.0, 1.0*x20.1*x3<=0.0, 1.0*x2<=0.0, 1.0*x2<0.0, -2.0*x3<0.0, -2.0*x3<=0.0, -1.0*x3<0.0, -1.0*x3<=0.0, -1.0*x1-2.0*x2<=200.0, 1.0*x11.12*x20.04*x3<=30.75, -1.0*x1-2.05*x20.11*x3<250.15, -228.84*x1200.0*x2-16.97*x3<=1373.25, -228.84*x1200.0*x2-16.97*x3<1373.25, 1.0*x11.1*x2<=0.0, ((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0, !(((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0), !(((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0), !(((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0), !(((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0)]
+res = :UNSAT
+.[QUERY] Found all non-linear combinations. Count: 3
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 2 input constraints and a disjunction of size 7
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 7
+[CTRL] Processing linear query no. 2
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, -73.18705430608887]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  7
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 6/9  (87.5%) CEs: 0 ETA: 0.0 sec (expected 7 stars)   
+(0.4 sec) Q: 0, Sets: 19/21  (96.875%) CEs: 5 ETA: 0.0 sec (expected 20 stars)   
+
+Total Stars: 26 (9 exact, 17 approx)
+Unfinished Stars: 0
+Runtime: 0.4 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 128
+Total Num Lps: 128
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [0.0, -0.30235403776168823]
+Output: [3.0329525470733643]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7565a02d9700>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 6
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 4 stars (out of 6; TO: 0).
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 3
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 2 input constraints and a disjunction of size 7
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 7
+[CTRL] Processing linear query no. 3
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, -73.18705430608887]
+[NNENUM] ub: [31.703236423477783, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  7
+[NNENUM] Enumeration in progress... 
+(0.3 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.4 sec) Q: 0, Sets: 7/10  (56.25%) CEs: 7 ETA: 0.3 sec (expected 12 stars)   
+(0.6 sec) Q: 0, Sets: 33/33  (100.0%) CEs: 33 ETA: 0.0 sec (expected 33 stars)    
+
+Total Stars: 33 (33 exact, 0 approx)
+Unfinished Stars: 0
+Runtime: 0.6 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 555
+Total Num Lps: 555
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [16.37685203552246, -14.88804817199707]
+Output: [8.29184341430664]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7565a02ca730>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 33
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 32 stars (out of 33; TO: 0).
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 3
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 7
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 7
+[CTRL] Processing linear query no. 4
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -73.18705430608887]
+[NNENUM] ub: [100.0, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  7
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.1 sec) Q: 0, Sets: 10/13  (65.625%) CEs: 10 ETA: 0.1 sec (expected 15 stars)   
+(0.2 sec) Q: 0, Sets: 14/18  (68.359%) CEs: 20 ETA: 0.1 sec (expected 20 stars)   
+Total Stars: 21 (21 exact, 0 approx)
+Unfinished Stars: 0
+Runtime: 0.2 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 420
+Total Num Lps: 420
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [31.703235626220703, -28.821125030517578]
+Output: [12.477522850036621]
+
+
+
+
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 420
+Total Num Lps: 420
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [31.703235626220703, -28.821125030517578]
+Output: [12.477522850036621]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ac49d0>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 21
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 20 stars (out of 21; TO: 0).
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 2
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 2
+[CTRL] Processing linear query no. 5
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -73.18705430608887]
+[NNENUM] ub: [100.0, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  2
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a49a272dc0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 5
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 5
+[CTRL] Processing linear query no. 6
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, -73.18705430608887]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  5
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.1 sec) Q: 0, Sets: 1/7  (50.0%) CEs: 1 ETA: 0.1 sec (expected 2 stars)   
+
+Total Stars: 16 (1 exact, 15 approx)
+Unfinished Stars: 0
+Runtime: 0.2 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 12
+Total Num Lps: 12
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [13.539803504943848, 0.0]
+Output: [-0.0005773305892944336]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499edab50>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 1
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 7
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 7
+[CTRL] Processing linear query no. 7
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, -134.49259155717084]
+[NNENUM] ub: [31.703236423477783, -73.18705430608887]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  7
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 1 (1 exact, 0 approx)
+Unfinished Stars: 0
+Runtime: 0.0 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 1
+Total Num Lps: 1
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [31.703235626220703, -110.3348617553711]
+Output: [47.2701301574707]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eca880>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 1
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 2
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 2
+[CTRL] Processing linear query no. 8
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, -73.18705430608887]
+[NNENUM] ub: [31.703236423477783, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  2
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ed21f0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+..[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 9
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.0]
+[NNENUM] ub: [16.376852110707294, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.1 sec) Q: 0, Sets: 11/14  (89.844%) CEs: 1 ETA: 0.0 sec (expected 12 stars)   
+
+Total Stars: 14 (3 exact, 11 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 138
+Total Num Lps: 138
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [16.37685203552246, 0.020006878301501274]
+Output: [-0.19016435742378235]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a49a272be0>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 1
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 10
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 10
+[CTRL] Processing linear query no. 10
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -200.0]
+[NNENUM] ub: [100.0, -134.49259155717084]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  10
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 5 (5 exact, 0 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 53
+Total Num Lps: 53
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [82.4344482421875, -134.49258422851562]
+Output: [47.784217834472656]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eca430>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 5
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 1 stars (out of 5; TO: 0).
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 3
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 9
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 9
+[CTRL] Processing linear query no. 11
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -134.49259155717084]
+[NNENUM] ub: [100.0, -73.18705430608887]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  9
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.1 sec) Q: 0, Sets: 13/18  (76.953%) CEs: 13 ETA: 0.0 sec (expected 17 stars)   
+
+Total Stars: 18 (18 exact, 0 approx)
+Unfinished Stars: 0
+Runtime: 0.2 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 323
+Total Num Lps: 323
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [31.703235626220703, -73.18705749511719]
+Output: [29.31581687927246]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eca3a0>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 18
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 11 stars (out of 18; TO: 0).
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 2
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 2
+[CTRL] Processing linear query no. 12
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -134.49259155717084]
+[NNENUM] ub: [100.0, -73.18705430608887]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  2
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ac42b0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 13
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, 0.0]
+[NNENUM] ub: [100.0, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ee3340>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 14
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, 0.0]
+[NNENUM] ub: [100.0, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ac4be0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 15
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, 0.0]
+[NNENUM] ub: [100.0, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ec2ca0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 16
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, 0.0]
+[NNENUM] ub: [100.0, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eda1f0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 17
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, 0.0]
+[NNENUM] ub: [31.703236423477783, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ee36a0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 5
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 5
+[CTRL] Processing linear query no. 18
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  5
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 4 (1 exact, 3 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 11
+Total Num Lps: 11
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [16.376840591430664, 0.0]
+Output: [-0.1780555546283722]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eca4c0>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 1
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 5
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 5
+[CTRL] Processing linear query no. 19
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  5
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 4 (1 exact, 3 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 11
+Total Num Lps: 11
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [16.376840591430664, 0.0]
+Output: [-0.1780555546283722]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ee3220>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 1
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 20
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, 0.0]
+[NNENUM] ub: [31.703236423477783, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ee3fd0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 5
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 5
+[CTRL] Processing linear query no. 21
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.0]
+[NNENUM] ub: [16.376852110707294, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  5
+[NNENUM] Enumeration in progress... 
+(0.0 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 8 (0 exact, 8 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 0
+Total Num Lps: 0
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499eca4f0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 1
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 1
+[CTRL] Processing linear query no. 22
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, 0.0]
+[NNENUM] ub: [31.703236423477783, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  1
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ed2280>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 4
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 4
+[CTRL] Processing linear query no. 23
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, 0.0]
+[NNENUM] ub: [31.703236423477783, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  4
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x71a499ee3c70>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+SAT: Test Failed at /home/jango/projects/NCubeV/test/integration/main.jl:14
+  Expression: cex_count == 88
+   Evaluated: 16 == 88
+
+Stacktrace:
+ [1] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:672 [inlined]
+ [2] macro expansion
+   @ ~/projects/NCubeV/test/integration/main.jl:14 [inlined]
+ [3] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:1577 [inlined]
+ [4] macro expansion
+   @ ~/projects/NCubeV/test/integration/main.jl:4 [inlined]
+ [5] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:1577 [inlined]
+ [6] top-level scope
+   @ ~/projects/NCubeV/test/integration/main.jl:3
+[CMD] Using SMT solver: Z3
+[CMD] Using verifier: NNEnum
+[CMD] Parsed initial query: NCubeV.AST.Query(((-1.0*x1<0.0&((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0&-1.0*x1<=0.0&1.0*x1<=100.0&-1.0*x2<=200.0&1.0*x2<=200.0&-1.0*x3<=100.0&1.0*x3<=100.01&(-1.0*x2<-0.1|1.0*x2<-2.1|-1.0*x1<-0.08))->(-1.0*x3<=-100.0|(-1.0*x3<=100.0&1.0*x3<100.0&(1.0*x3<0.0|-1.0*x3<0.0)&((((-1.0*x3<0.0&1.0*x20.1*x3<0.0)|(1.0*x3<0.0&-1.0*x2-0.1*x3<0.0)|(-1.0*x3<0.0&-1.0*x2<0.0)|(1.0*x3<0.0&1.0*x2<0.0))&((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0)|(((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0&((-2.0*x3<0.0&((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0)|(2.0*x3<0.0&((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0)))))|(1.0*x3<=0.0&-1.0*x3<=0.0&((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0))), Set(NCubeV.AST.Variable[rAccpost, rVel, rPos]), 2, 1, Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}(), Vector{Float64}[])
+[CMD] SMT Timeout: 10s
+[CTRL] Iterating over conjunctions...
+[APPROX] Trying to build approximation...
+[APPROX] Generating expression for (rVel^2.0)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost^2.0)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rPos)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rVel)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Approximation Bounds: Vector{Float64}[]
+[APPROX] Approximations: Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}()
+[APPROX] Approximation is ready
+[SKELETON] Adding linear dependency constraint
+Float32[-1.0, 0.0, 0.0]+0.0<0.0 -> -1.0*x1<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<-0.1 -> Float32[0.0, -1.0, 0.0]+0.0<=200.0
+-0.09999999999999999999999999999999999999999999999999999999999999999999999999999914
+[SKELETON] Adding linear dependency constraint
+1.0*x2<-2.1 -> Float32[0.0, 1.0, 0.0]+0.0<=200.0
+-2.099999999999999999999999999999999999999999999999999999999999999999999999999986
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<-2.1 | !Float32[0.0, -1.0, 0.0]+0.0<-0.1
+[SKELETON] Adding linear dependency constraint
+-1.0*x1<-0.08 -> Float32[-1.0, 0.0, 0.0]+0.0<0.0
+-0.07999999999999999999999999999999999999999999999999999999999999999999999999999996
+[SKELETON] Adding linear dependency constraint
+-1.0*x1<-0.08 -> Float32[-1.0, 0.0, 0.0]+0.0<=0.0
+-0.07999999999999999999999999999999999999999999999999999999999999999999999999999996
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=-100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+-100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<100.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00999999999999
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00999999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -1.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<0.0 -> Float32[0.0, -1.0, 0.0]+0.0<=200.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, -1.0, 0.0]+0.0<-0.1 -> -1.0*x2<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x2<0.0 | !Float32[0.0, 1.0, 0.0]+0.0<-2.1
+[SKELETON] Adding linear dependency constraint
+1.0*x2<0.0 -> Float32[0.0, 1.0, 0.0]+0.0<=200.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 1.0, 0.0]+0.0<-2.1 -> 1.0*x2<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<-0.1
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-2.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00999999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=100.00999999999999
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0.0 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0.0 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0.0
+.[QUERY] Found all non-linear combinations. Count: 1
+..[QUERY] Found all non-linear combinations. Count: 1
+┌ Warning: [nl_feasible] Discrepancy between SMT and Sat solver results.
+└ @ NCubeV.SMTInterface ~/projects/NCubeV/src/SMTInterface/Main.jl:93
+constraints = NCubeV.AST.Formula[-1.0*x1<=0.0, 1.0*x1<=16.38, -1.0*x2<=73.19, 1.0*x2<=0.0, -1.0*x3<=-0.01, 1.0*x3<=100.01, -1.0*x1<0.0, -1.0*x1<=0.0, 1.0*x1<=100.0, -1.0*x2<=200.0, 1.0*x2<=200.0, -1.0*x3<=100.0, 1.0*x3<=100.01, 1.0*x2<=0.1, 1.0*x2<-2.1, 1.0*x3<100.0, 1.0*x3<100.0, -1.0*x3<=0.0, -1.0*x3<0.0, -1.0*x2-0.1*x3<=0.0, 1.0*x2<=0.0, 1.0*x2<0.0, -2.0*x3<0.0, -2.0*x3<=0.0, -1.0*x3<0.0, -1.0*x3<=0.0, -1.0*x1-2.0*x2<=200.0, 1.0*x11.12*x20.04*x3<=30.75, -228.84*x1200.0*x2-16.97*x3<=1373.22, -228.84*x1200.0*x2-16.97*x3<1373.22, 1.0*x11.1*x2<=0.0, ((-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<=0.0, !(((-0.005000000000000001*rAccpost)+(-0.1*rVel)+(-1.0*rPos)+(5.0e-5*(rAccpost^2.0))+(0.004999999999999999*(rVel^2.0))+(0.001*rAccpost*rVel))<0.0), !(((rVel^2.0)+(-2.0*rAccpost*rPos))<0.0), !(((-1.0*(rVel^2.0))+(2.0*rAccpost*rPos))<0.0), !(((-0.1*rVel)+(-1.0*rPos)+(0.004999999999999999*(rVel^2.0)))<0.0)]
+res = :UNSAT
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 2
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, -73.18705430608887]
+[NNENUM] ub: [16.376852110707294, -2.1]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 21/26  (18.359%) CEs: 0 ETA: 0.7 sec (expected 114 stars)   
+(0.4 sec) Q: 0, Sets: 61/66  (88.086%) CEs: 2 ETA: 0.1 sec (expected 69 stars)   
+(0.8 sec) Q: 0, Sets: 127/132  (91.748%) CEs: 16 ETA: 0.1 sec (expected 138 stars)   
+(1.0 sec) Q: 0, Sets: 178/180  (99.609%) CEs: 16 ETA: 0.0 sec (expected 179 stars)   
+Total Stars: 181 (141 exact, 40 approx)
+Unfinished Stars: 0
+Runtime: 1.0 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 3205
+Total Num Lps: 3205
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [0.0, -2.0999999046325684]
+Output: [100.0009994506836]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ca7c0>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 16
+[NNENUM] Filtering result using SMT solver...
+[SMT] SMT filtered out 16 stars (out of 16; TO: 0).
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 3
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, -73.18705430608887]
+[NNENUM] ub: [31.703236423477783, -2.1]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 21 (9 exact, 12 approx)
+Unfinished Stars: 0
+Runtime: 0.2 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 437
+Total Num Lps: 437
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [16.37685203552246, -14.88804817199707]
+Output: [100.0009994506836]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18cab20>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 4
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -73.18705430608887]
+[NNENUM] ub: [100.0, -2.1]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 18 (12 exact, 6 approx)
+Unfinished Stars: 0
+Runtime: 0.2 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 617
+Total Num Lps: 617
+
+Result: network is UNSAFE with confirmed counterexample in result.cinput and result.coutput
+Input: [31.703235626220703, -28.821125030517578]
+Output: [100.00093841552734]
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18caa30>
+[NNENUM] Enumeration finished.
+unsafe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 5
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -134.49259155717084]
+[NNENUM] ub: [100.0, -73.18705430608887]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f1cd95e0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 6
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [16.376852110707294, -134.49259155717084]
+[NNENUM] ub: [31.703236423477783, -73.18705430608887]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ea220>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 6
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 6
+[CTRL] Processing linear query no. 7
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [31.703236423477783, -200.0]
+[NNENUM] ub: [100.0, -134.49259155717084]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  6
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18cab80>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+.[QUERY] Found all non-linear combinations. Count: 2
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 5
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 5
+[CTRL] Processing linear query no. 8
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, -2.1]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  5
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 3/11  (0.781%) CEs: 0 ETA: 23.6 sec (expected 384 stars)   
+(0.4 sec) Q: 0, Sets: 26/37  (3.174%) CEs: 0 ETA: 12.0 sec (expected 819 stars)   
+(0.8 sec) Q: 0, Sets: 94/94  (100.0%) CEs: 0 ETA: 0.0 sec (expected 94 stars)     
+
+Total Stars: 94 (2 exact, 92 approx)
+Unfinished Stars: 0
+Runtime: 0.8 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 53
+Total Num Lps: 53
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ead30>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 9
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, -2.1]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 9/20  (0.842%) CEs: 0 ETA: 20.7 sec (expected 1069 stars)   
+(0.4 sec) Q: 0, Sets: 28/35  (6.641%) CEs: 0 ETA: 5.4 sec (expected 422 stars)   
+(0.8 sec) Q: 0, Sets: 78/81  (60.938%) CEs: 0 ETA: 0.5 sec (expected 128 stars)   
+(1.2 sec) Q: 0, Sets: 126/131  (92.285%) CEs: 0 ETA: 0.1 sec (expected 137 stars)   
+Total Stars: 135 (8 exact, 127 approx)
+Unfinished Stars: 0
+Runtime: 1.3 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 126
+Total Num Lps: 126
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f1cc9cd0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+.[QUERY] Found all non-linear combinations. Count: 1
+.[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 10
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.09999999999999999]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f1cd2340>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 11
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 3 (0 exact, 3 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 0
+Total Num Lps: 0
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ca130>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+..[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 12
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 3 (0 exact, 3 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 0
+Total Num Lps: 0
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ca1c0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 13
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.07999999999999999, 0.0]
+[NNENUM] ub: [16.376852110707294, 0.09999999999999999]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+
+Total Stars: 5 (0 exact, 5 approx)
+Unfinished Stars: 0
+Runtime: 0.1 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 0
+Total Num Lps: 0
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18ea970>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 14
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.09999999999999999]
+[NNENUM] ub: [16.376852110707294, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 14/18  (48.242%) CEs: 0 ETA: 0.2 sec (expected 29 stars)   
+(0.4 sec) Q: 0, Sets: 43/47  (71.875%) CEs: 0 ETA: 0.1 sec (expected 60 stars)   
+(0.7 sec) Q: 0, Sets: 82/86  (84.375%) CEs: 0 ETA: 0.1 sec (expected 97 stars)   
+Total Stars: 109 (10 exact, 99 approx)
+Unfinished Stars: 0
+Runtime: 0.8 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 264
+Total Num Lps: 264
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f18d17c0>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Found all non-linear combinations. Count: 1
+[QUERY] Returning nonlinear disjunction
+[CTRL] Considering conjunction with 3 input constraints and a disjunction of size 3
+[APPROX] Checking cache: NCubeV.Approx.ApproxCacheObject[]
+[APPROX] Constructing Approximation
+[APPROX] Resolving approximation
+[CTRL] Initiating iterator over current linear queries
+[APPROX] # Conjunctions over output: 3
+[CTRL] Processing linear query no. 15
+[NNENUM] Running nnenum now...
+[NNENUM] lb: [0.0, 0.09999999999999999]
+[NNENUM] ub: [16.376852110707294, 200.0]
+[NNENUM] Creating LP Star...
+[NNENUM] Checking feasibility
+[NNENUM] Generating output Spec...
+[NNENUM] Spec list length:  3
+[NNENUM] Enumeration in progress... 
+(0.1 sec) Q: 0, Sets: 0/1  (0.0%) CEs: 0 ETA: - (expected 1 stars)   
+(0.2 sec) Q: 0, Sets: 14/19  (6.25%) CEs: 0 ETA: 2.5 sec (expected 224 stars)   
+(0.4 sec) Q: 0, Sets: 47/55  (50.195%) CEs: 0 ETA: 0.4 sec (expected 94 stars)    
+(0.7 sec) Q: 0, Sets: 88/90  (74.902%) CEs: 0 ETA: 0.2 sec (expected 117 stars)   
+Total Stars: 98 (6 exact, 92 approx)
+Unfinished Stars: 0
+Runtime: 0.7 sec
+Completed work frac: 1.0
+Num Stars Copied Between Processes: 0
+Num Lps During Enumeration: 167
+Total Num Lps: 167
+
+Result: network is SAFE
+
+[NNENUM] Result: 
+<nnenum.result.Result object at 0x7f20f1ce3490>
+[NNENUM] Enumeration finished.
+safe
+[NNENUM] Found counter-example stars: 0
+[NNENUM] Filtering result using SMT solver...
+Test Summary:     | Pass  Fail  Total     Time
+Integration Tests |    1     1      2  3m02.1s
+  SAT             |          1      1  2m13.3s
+  UNSAT           |    1            1    48.9s
+ERROR: LoadError: Some tests did not pass: 1 passed, 1 failed, 0 errored, 0 broken.
+in expression starting at /home/jango/projects/NCubeV/test/integration/main.jl:2
+in expression starting at /home/jango/projects/NCubeV/test/runtests.jl:4
+ERROR: Package NCubeV errored during testing
+
+(NCubeV) pkg> 

@@ -1,0 +1,161 @@
+x1 = 0.44999999999999996
+x2 = -9.0
+x3 = 90.0
+
+answers = [-1.0*x1<=0.0,
+1.0*x1<=16.38,
+-1.0*x2<=73.19,
+1.0*x2<=0.0,
+-1.0*x3<=0.0,
+1.0*x3<=100.0,
+-1.0*x1<0.0,
+-1.0*x1<=0.0,
+1.0*x1<=100.0,
+-1.0*x2<=200.0,
+1.0*x2<=200.0,
+-1.0*x3<=100.0,
+1.0*x3<=100.0,
+1.0*x3<100.0, 
+-1.0*x3<=100.0,
+1.0*x3<100.0, 
+-1.0*x3<=0.0,
+-1.0*x3<0.0,
+-1.0*x2-0.1*x3<=0.0, 
+1.0*x2+0.1*x3<=0.0, 
+1.0*x2<=0.0,
+1.0*x2<0.0,
+-2.0*x3<0.0,
+-2.0*x3<=0.0,
+-1.0*x3<0.0,
+-1.0*x3<=0.0,
+((-1.0*x1)+(0.004999999999999999*(x2^2.0)))<=0.0,
+((-0.005000000000000001*x3)+(-0.1*x2)+(-1.0*x1)+(5.0e-5*(x3^2.0))+(0.004999999999999999*(x2^2.0))+(0.001*x3*x2))<0.0,
+!(((x2^2.0)+(-2.0*x3*x1))<0.0),
+((-1.0*(x2^2.0))+(2.0*x3*x1))<0.0,
+!(((-0.1*x2)+(-1.0*x1)+(0.004999999999999999*(x2^2.0)))<0.0)]
+
+for (i,a) in enumerate(answers)
+   println("Answer $i: $a")
+end
+
+terms = [-0.1*x2,-0.005000000000000001*x3,-1.0*x1,5.0e-5*(x3^2.0),0.004999999999999999*(x2^2.0),0.001*x3*x2]
+for (i,t) in enumerate(terms)
+   println("Term $i: $t")
+end
+sum = 0.0
+for t in terms
+   sum += t
+   println("Partial sum: $sum")
+end
+Term 1: -0.45000000000000007
+Term 2: 0.9
+Term 3: -0.44999999999999996
+Term 4: 0.405
+Term 5: 0.4049999999999999
+Term 6: -0.8099999999999999
+Partial sum: 0.9
+Partial sum: 0.44999999999999996
+Partial sum: 0.0
+Partial sum: 0.405
+Partial sum: 0.8099999999999999
+Partial sum: 0.0
+
+@satvariable(y[1:3], Real)
+sat!((y[1] == 0.001*y[3]*y[2]) ∧ (y[2] == -9.0) ∧ (y[3] == 90.0))
+and_c6bbc698bd003bdc = true
+ | and_bedc7fc104154553 = true
+ |  | eq_4e15721a3cfd4c7e = true
+ |  |  | y_2 = -9.0
+ |  |  | const_neg_9.0 = -9.0
+ |  | eq_a89f9e1df3e55c07 = true
+ |  |  | y_1 = -0.81
+ |  |  | mul_9541725f7e313b2d = -0.81
+ |  |  |  | const_0.001 = 0.001
+ |  |  |  | y_2 = -9.0
+ |  |  |  | y_3 = 90.0
+ | eq_543091bd702738bd = true
+ |  | y_3 = 90.0
+ |  | const_90.0 = 90.0
+
+
+
+l1 = LinearConstraint([-1.0], 0.0, true)
+l2 = LinearConstraint([1.0], 16.38, true)
+l3 = LinearConstraint([0.0, -1.0], 73.19, true)
+l4 = LinearConstraint([0.0, 1.0], 0.0, true)
+l5 = LinearConstraint([0.0, 0.0, -1.0], 0.0, true)
+l6 = LinearConstraint([0.0, 0.0, 1.0], 100.0, true)
+l7 = LinearConstraint([-1.0], 0.0, false)
+l8 = LinearConstraint([-1.0], 0.0, true)
+l9 = LinearConstraint([1.0], 100.0, true)
+l10 = LinearConstraint([0.0, -1.0], 200.0, true)
+l11 = LinearConstraint([0.0, 1.0], 200.0, true)
+l12 = LinearConstraint([0.0, 0.0, -1.0], 100.0, true)
+l13 = LinearConstraint([0.0, 0.0, 1.0], 100.0, false)
+l14 = LinearConstraint([0.0, 0.0, 1.0], 100.0, true)
+l15 = LinearConstraint([0.0, 0.0, -1.0], 100.0, true)
+l16 = LinearConstraint([0.0, 0.0, 1.0], 100.0, true)
+l17 = LinearConstraint([0.0, 0.0, -1.0], 0.0, true)
+l18 = LinearConstraint([0.0, 0.0, -1.0], 0.0, false)
+l19 = LinearConstraint([0.0, -1.0, -0.1], 0.0, true)
+l20 = LinearConstraint([0.0, 1.0, 0.1], 0.0, true)
+l21 = LinearConstraint([0.0, 1.0], 0.0, true)
+l22 = LinearConstraint([0.0, 1.0], 0.0, false)
+l23 = LinearConstraint([0.0, 0.0, -2.0], 0.0, false)
+l24 = LinearConstraint([0.0, 0.0, -2.0], 0.0, true)
+l25 = LinearConstraint([0.0, 0.0, -1.0], 0.0, false)
+l26 = LinearConstraint([0.0, 0.0, -1.0], 0.0, true)
+
+m0 = Atom(LessEq, CompositeTerm(Add, [CompositeTerm(Mul, [TermNumber(-1.0), Variable("x1", nothing, 1)]), CompositeTerm(Mul, [TermNumber(0.004999999999999999), CompositeTerm(Pow, [Variable("x2", nothing, 2), TermNumber(2.0)])])]), TermNumber(0.0))
+
+t1 = CompositeTerm(Mul, [TermNumber(-0.005000000000000001), Variable("x3", nothing, 3)])
+t2 = CompositeTerm(Mul, [TermNumber(-0.1), Variable("x2", nothing, 2)])
+t3 = CompositeTerm(Mul, [TermNumber(-1.0), Variable("x1", nothing, 1)])
+t4 = CompositeTerm(Mul, [TermNumber(5.0e-5), CompositeTerm(Pow, [Variable("x3", nothing, 3), TermNumber(2.0)])])
+t5 = CompositeTerm(Mul, [TermNumber(0.004999999999999999), CompositeTerm(Pow, [Variable("x2", nothing, 2), TermNumber(2.0)])])
+t6 = CompositeTerm(Mul, [TermNumber(0.001), Variable("x3", nothing, 3), Variable("x2", nothing, 2)])
+
+t = CompositeTerm(Add, [t1, t2, t3, t4, t5, t6])
+f = Atom(Less, t, TermNumber(0.0))
+
+m1 = CompositeFormula(Not, [Atom(Less, CompositeTerm(Add, [CompositeTerm(Pow, [Variable("x2", nothing, 2), TermNumber(2.0)]),
+										CompositeTerm(Mul, [TermNumber(-2.0), Variable("x3", nothing, 3), Variable("x1", nothing, 1)])
+										]), TermNumber(0.0))])
+m2 = Atom(Less, CompositeTerm(Add, [CompositeTerm(Mul, [TermNumber(-1.0), 
+														CompositeTerm(Pow, [Variable("x2", nothing, 2),TermNumber(2.0)])
+														]),
+									CompositeTerm(Mul, [TermNumber(2.0), 
+														Variable("x3", nothing, 3),
+														Variable("x1", nothing, 1)
+														])
+									]),TermNumber(0.0))
+m3 = CompositeFormula(Not, [Atom(Less, CompositeTerm(Add, [CompositeTerm(Mul, [TermNumber(-0.1), Variable("x2", nothing, 2)]),
+										CompositeTerm(Mul, [TermNumber(-1.0), Variable("x1", nothing, 1)]),
+										CompositeTerm(Mul, [TermNumber(0.004999999999999999), CompositeTerm(Pow, [Variable("x2", nothing, 2), TermNumber(2.0)])])
+										]), TermNumber(0.0))])
+
+
+constraints = [l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18,l19,l20,l21,l22,l23,l24,l25,m0,f,m1,m2,m3]
+
+
+using NCubeV.AST
+using NCubeV.SMTInterface
+using Satisfiability
+@satvariable(x[1:3], Real)
+additional = []
+cons_trans = map(con -> ast2sat(con, x, additional, Dict()), constraints)
+expr = Satisfiability.and(cons_trans...)
+!isempty(additional) && (expr = expr ∧ Satisfiability.and(additional...)) 
+sat!(expr, solver=Z3(), logic="QF_NRA")
+
+
+ctx = Context()
+solver = Solver(ctx)
+y1 = real_const(ctx, "x1")
+y2 = real_const(ctx, "x2")
+y3 = real_const(ctx, "x3")
+variables = [y1, y2, y3]
+for con in constraints
+   add(solver, ast2smt(con, variables, [], Dict()))
+end
+check(solver)

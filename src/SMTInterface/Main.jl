@@ -24,7 +24,7 @@ module SMTInterface
 
 	using Satisfiability: Z3 as SatZ3, Solver as SatSolver
 
-	export smt_context, nl_feasible, nl_feasible_init, ast2sat
+	export smt_context, nl_feasible, nl_feasible_init, ast2sat, ast2smt
 
 	USE_CORES = true
 
@@ -93,14 +93,16 @@ module SMTInterface
 				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
 				@show constraints
 				@show res
+				#@show expr
+				#@assert false "SMT and Sat solver results disagree."
 			elseif smt_internal_is_unsat(res1) && (res == :SAT)
 				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
 				@show constraints
 				@show res
-				@show expr
+				#@show expr
 				#@assert false "SMT and Sat solver results disagree."
 			else
-				println("[nl_feasible] SMT and Sat solver results agree $(res).")
+				#println("[nl_feasible] SMT and Sat solver results agree $(res).")
 			end
 	
 			@timeit TIMER "SMTprep" begin
