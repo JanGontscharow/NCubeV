@@ -53,7 +53,7 @@ end
 Substitute variables in `f` using either numeric constants or inline formulas
 provided as strings. The latter are parsed via `Parsing.parse_term`.
 """
-function fix_variables(f :: Formula, mapping::Dict{String, Union{String, Number}})
+function fix_variables(f :: Formula, mapping::Dict{String, Union{String, Rational{Int64}, Int64}})
 	replacement_map = Dict{Variable, Term}()
 	for (k, v) in mapping
 		if v isa String
@@ -61,7 +61,7 @@ function fix_variables(f :: Formula, mapping::Dict{String, Union{String, Number}
 			parsed :: Term = Parsing.parse_constraint_from_io(content_io;parse_entry=Parsing.parse_term)
 			replacement_map[Variable(k)] = parsed
 		else
-			replacement_map[Variable(k)] = TermNumber(v)
+			replacement_map[Variable(k)] = TermNumber(convert(Rational{BigInt},v))
 		end
 	end
 	return simplify(substitute(f, replacement_map, fold=false))

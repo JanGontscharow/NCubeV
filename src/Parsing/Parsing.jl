@@ -423,7 +423,7 @@ function parse_factor(tokenmanager :: TokenManager)
 		@debug "Parsing number"
 		current_token = next(tokenmanager)
 		#TODO(steuber): FLOAT INCORRECTNESS
-		return TermNumber(parse(BigFloat, untokenize(current_token)))
+		return TermNumber(parse(Rational{BigInt}, untokenize(current_token)))
 	elseif Tokens.kind(current_token) == Tokens.IDENTIFIER
 		@debug "Parsing variable"
 		current_token = next(tokenmanager)

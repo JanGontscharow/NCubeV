@@ -23,7 +23,7 @@ Notes
 See also: [`prepare_for_olnnv`](@ref), [`run_query`](@ref).
 """
 function load_query(file::String,
-						fixed_variables::Dict{String, Union{String, Number}},
+						fixed_variables::Dict{String, Union{String, Rational{Int64}, Int64}},
 						mapping::Dict{String, Tuple{AST.VariableType, Int64}})
 	# Load the problem
 	constraints :: Formula  = Parsing.parse_constraint(file)

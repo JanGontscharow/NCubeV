@@ -118,7 +118,7 @@ module Cmd
 			return read(f, String)
 		end
 		fixed_parsed = Meta.parse(fixed_vars_content)
-		fixed_vars = Dict{String,Union{String,Number}}(eval(fixed_parsed))
+		fixed_vars = Dict{String,Union{String,Rational{Int64}, Int64}}(eval(fixed_parsed))
 		# Load mapping
 		mapping_content = open(args["mapping"], "r") do f
 			return read(f, String)

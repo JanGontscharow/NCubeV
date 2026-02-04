@@ -94,13 +94,13 @@ module SMTInterface
 				@show constraints
 				@show res
 				#@show expr
-				#@assert false "SMT and Sat solver results disagree."
+				@assert false "SMT and Sat solver results disagree."
 			elseif smt_internal_is_unsat(res1) && (res == :SAT)
 				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
 				@show constraints
 				@show res
 				#@show expr
-				#@assert false "SMT and Sat solver results disagree."
+				@assert false "SMT and Sat solver results disagree."
 			else
 				#println("[nl_feasible] SMT and Sat solver results agree $(res).")
 			end
