@@ -60,22 +60,72 @@ Partial sum: 0.405
 Partial sum: 0.8099999999999999
 Partial sum: 0.0
 
+Ich möchte meinem vorgesetzen eine update email schreiben.
+
+Ich habe jetzt nl_feasible auf die gleiche weise geprüft und es 5 mal weicht es ab. Ich hab ein Beispiel näher untersucht und folgendes entdeckt:
+
 @satvariable(y[1:3], Real)
-sat!((y[1] == 0.001*y[3]*y[2]) ∧ (y[2] == -9.0) ∧ (y[3] == 90.0))
-and_c6bbc698bd003bdc = true
- | and_bedc7fc104154553 = true
- |  | eq_4e15721a3cfd4c7e = true
- |  |  | y_2 = -9.0
- |  |  | const_neg_9.0 = -9.0
- |  | eq_a89f9e1df3e55c07 = true
- |  |  | y_1 = -0.81
- |  |  | mul_9541725f7e313b2d = -0.81
- |  |  |  | const_0.001 = 0.001
- |  |  |  | y_2 = -9.0
+
+expr = and(
+    y[2] == -9.0, 
+    y[3] == 90.0, 0.81 + (0.001 * y[3] * y[2]) == 0.0,
+    0.8099999999999999 + (0.001 * y[3] * y[2]) != 0.0)
+julia> expr = (y[2] == 9.0) ∧ 
+
+               (y[3] == 90.0) ∧ 
+
+               ((0.001*y[3]*y[2]) == 0.81) ∧
+
+               ((0.001*y[3]*y[2]) != 0.8099999999999999)
+
+julia> sat!(expr)
+
+:SAT
+
+julia> expr
+
+and_9a45dcb538fc655b = true
+
+ | and_a553fd00f013b7fa = true
+
+ |  | and_dd539b4382bb2870 = true
+
+ |  |  | eq_543091bd702738bd = true
+
  |  |  |  | y_3 = 90.0
- | eq_543091bd702738bd = true
- |  | y_3 = 90.0
- |  | const_90.0 = 90.0
+
+ |  |  |  | const_90.0 = 90.0
+
+ |  |  | eq_8e0a43c2fdb58477 = true
+
+ |  |  |  | y_2 = 9.0
+
+ |  |  |  | const_9.0 = 9.0
+
+ |  | eq_6cd171436d870eaf = true
+
+ |  |  | mul_9541725f7e313b2d = 0.81
+
+ |  |  |  | const_0.001 = 0.001
+
+ |  |  |  | y_2 = 9.0
+
+ |  |  |  | y_3 = 90.0
+
+ |  |  | const_0.81 = 0.81
+
+ | distinct_31b67ea156340420 = true
+
+ |  | mul_9541725f7e313b2d = 0.81
+
+ |  |  | const_0.001 = 0.001
+
+ |  |  | y_2 = 9.0
+
+ |  |  | y_3 = 90.0
+
+ |  | const_0.8099999999999999 = 0.8099999999999999
+
 
 
 
@@ -155,7 +205,44 @@ y1 = real_const(ctx, "x1")
 y2 = real_const(ctx, "x2")
 y3 = real_const(ctx, "x3")
 variables = [y1, y2, y3]
+add(solver, y2 == 9.0)
+add(solver, y3 == 90.0)
+add(solver, (0.001 * y3 * y2) != 0.81)
+add(solver, (0.001 * y3 * y2) == 0.8099999999999999)
+f = CompositeFormula(And, [
+        Atom(Eq, Variable("x2", nothing, 2), TermNumber(-9.0)),
+        Atom(Eq, Variable("x3", nothing, 3), TermNumber(90.0)),
+        Atom(Eq, 
+            CompositeTerm(Mul, [TermNumber(0.001), Variable("x3", nothing, 3), Variable("x2", nothing, 2)]),
+            TermNumber(0.8099999999999999)
+            ),
+        Atom(Neq, 
+            CompositeTerm(Mul, [TermNumber(0.001), Variable("x3", nothing, 3), Variable("x2", nothing, 2)]),
+            TermNumber(0.81))
+            ])
+        ])
+
+
 for con in constraints
    add(solver, ast2smt(con, variables, [], Dict()))
 end
-check(solver)
+check(solver) == Z3.SAT
+
+Um diese Formel mit dem Z3.jl-Paket in Julia zu formulieren, musst du beachten, dass Z3 strikt zwischen symbolischen Ausdrücken und Julia-Werten unterscheidet.
+
+Da du hier mit Floating-Point-Werten arbeitest, die in Z3 als Real (rationale Zahlen) oder FloatingPoint behandelt werden können, ist es am sichersten, real_const zu verwenden. Z3 rechnet bei Real intern mit unendlicher Präzision (als Brüche), was genau das ist, was du brauchst, um den Unterschied zwischen 0.81 und 0.8099999999999999 sauber abzubilden.
+
+Hier ist der Code:
+
+Julia
+using Z3
+
+ctx = Context()
+solver = Solver(ctx)
+y2 = real_const(ctx, "y2")
+y3 = real_const(ctx, "y3")
+add(solver, y2 == -9.0)
+add(solver, y3 == 90.0)
+add(solver, 0.81 + (0.001 * y3 * y2) == 0.0)
+add(solver, 0.8099999999999999 + (0.001 * y3 * y2) == 0.0)
+check(solver) == Z3.sat
