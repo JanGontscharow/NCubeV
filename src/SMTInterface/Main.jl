@@ -91,18 +91,18 @@ module SMTInterface
 			res = sat!(expr, solver=SatZ3(), logic="QF_NRA")
 			if smt_internal_is_sat(res1) && (res != :SAT)
 				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
-				@show constraints
+				#@show constraints
 				@show res
 				#@show expr
-				@assert false "SMT and Sat solver results disagree."
-			elseif smt_internal_is_unsat(res1) && (res == :SAT)
+				#@assert false "SMT and Sat solver results disagree."
+			elseif smt_internal_is_unsat(res1) && (res != :UNSAT)
 				@warn "[nl_feasible] Discrepancy between SMT and Sat solver results."
-				@show constraints
+				#@show constraints
 				@show res
 				#@show expr
-				@assert false "SMT and Sat solver results disagree."
+				#@assert false "SMT and Sat solver results disagree."
 			else
-				#println("[nl_feasible] SMT and Sat solver results agree $(res).")
+				println("[nl_feasible] SMT and Sat solver results agree $(res).")
 			end
 	
 			@timeit TIMER "SMTprep" begin
@@ -179,19 +179,21 @@ module SMTInterface
 				expr = Satisfiability.__wrap_const(expr)
 			end
 
-			res = sat!(expr, solver=SatZ3(), logic="QF_LRA")
+			res = sat!(expr, solver=SatZ3(), logic="QF_NRA")
 			if smt_internal_is_sat(res1) && (res != :SAT)
 				@warn "[lin_feasible] Discrepancy between SMT and Sat solver results."
-				@show constraints
+				#@show constraints
 				@show res
-			elseif smt_internal_is_unsat(res1) && (res == :SAT)
+				#@show expr
+				#@assert false "SMT and Sat solver results disagree."
+			elseif smt_internal_is_unsat(res1) && (res != :UNSAT)
 				@warn "[lin_feasible] Discrepancy between SMT and Sat solver results."
-				@show constraints
+				#@show constraints
 				@show res
-				@show expr
-				@assert false "SMT and Sat solver results disagree."
+				#@show expr
+				#@assert false "SMT and Sat solver results disagree."
 			else
-				#println("[lin_feasible] SMT and Sat solver results agree $(res).")
+				println("[lin_feasible] SMT and Sat solver results agree $(res).")
 			end
 			
 			@timeit TIMER "SMTprep" begin

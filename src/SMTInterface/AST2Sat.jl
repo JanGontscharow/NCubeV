@@ -299,45 +299,40 @@ end
 function ast2sat(v :: Variable, variables, additional, smt_cache)
 	return variables[v.position]
 end
-function ast2sat(n::TermNumber, variables, additional, smt_cache)
+function ast2sat(n::TermNumber, variables, additional, smt_cache)	
+	x_rat = rationalize(Int32,Float32(n.value))
+	den = Satisfiability.to_int(denominator(x_rat))
+	num = Satisfiability.to_int(numerator(x_rat))
+	if occursin("e", string(den)) || occursin("e", string(num))
+		@warn "Rationalized number $(x_rat) contains scientific notation"
+		@show x_rat
+	end
+	@satvariable(t_shield, Real)
+	res = num / (den * t_shield)
+	if !any(a -> isequal(a, t_shield), additional)
+		push!(additional, t_shield == 1.0)
+	end
+	return res
+
+	#------------------------
+
 	x = Float64(n.value)
-	#x = rationalize(Int64, x)
-	#den = denominator(x)
-	#num = numerator(x)
-	#if occursin("e", string(den)) || occursin("e", string(num))
-	#@show x
-	#	@show den
-	#	@show num
-	#	@assert false "Rationalized number contains scientific notation."
-	#end
-	#if num == 0
-	#	return to_real(den)
-	#end
-	#@show to_real(den), to_real(num)
-	#@show  to_real(den) / to_real(num)
-	#return to_real(den) / to_real(num) 
-
 	x_str = string(x)
-
 	if !occursin("e", x_str)
 		return x
 	else
-		#@warn "$(x) contains scientific notation. adding shield variable."
+		@warn "$(x) contains scientific notation. adding shield variable."
 		@satvariable(t_shield, Real)
 		push!(additional, t_shield == 1.0)
-
 		parts = split(x_str, 'e')
 		coeff = parse(Float64, parts[1])
 		exponent = parse(Int, parts[2])
-
 		@assert exponent < 0 "Only negative exponents are supported for shield variables."
-		
 		divisor = 10.0^(-exponent)
-
 		@assert !occursin(string(divisor), "e") "Shield variable divisor cannot be in scientific notation."
-
 		return (coeff / (divisor * t_shield))
 	end
-	
+
+
 end
 
