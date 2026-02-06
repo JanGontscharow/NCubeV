@@ -241,30 +241,22 @@ function ast2sat(f :: Atom, variables, additional, smt_cache=Dict())
 end
 
 
-function ast2sat_smt_pow(base, exp, variables=[], additional=[], smt_cache=Dict())
-	@assert isa(exp, TermNumber) "Exponent must be a TermNumber."
-	@assert isa(base, TermNumber) || isa(base, Variable) "Base must be a TermNumber, Variable."
-	
-	num = exp.value.num
-	den = exp.value.den
-
-	if den == 1
-		if isa(base, TermNumber)
-			return ast2sat(base^exp, variables, additional, smt_cache)
+function sat_smt_pow(arguments)
+	@assert length(arguments) == 2
+	exp = Rational{BigInt}(arguments[2])
+	base = arguments[1]
+	if exp.den == 1
+		if exp.num > 0
+			# xⁿ = x ⋅ x ⋯ x
+			return foldl(*, fill(base, exp.num))
+		elseif exp.num < 0
+			# x⁻ⁿ = 1 / (x ⋅ x ⋯ x)
+			return 1.0 / foldl(*, fill(base, -exp.num))
 		else
-			var = ast2sat(base, variables, additional, smt_cache)
-			if num > 0
-				# xⁿ = x ⋅ x ⋯ x
-				return foldl(*, fill(var, num))
-			elseif num < 0
-				# x⁻ⁿ = 1 / (x ⋅ x ⋯ x)
-				return 1.0 / foldl(*, fill(var, -num))
-			else
-				return 1.0
-			end		
+			return 1.0
 		end
 	else
-		@assert false "Non-integer exponents not supported in SMT backend yet."
+		@assert False, "Non-integer exponents not supported in SMT backend yet."
 		# TODO(steuber): Implement roots again (but probably hard for SMT solver anyway...)
 	end
 end
@@ -279,60 +271,52 @@ function ast2sat(f :: CompositeTerm, variables, additional, smt_cache)
 	if haskey(smt_cache, f)
 		return smt_cache[f]
 	end
-	if f.operation ≠ Pow
-		arguments = map(x -> ast2sat(x, variables, additional, smt_cache), f.args)
-		res = @match f.operation begin
-			Add => +(arguments...)
-			Sub => -(arguments...)
-			Mul => *(arguments...)
-			Div => /(arguments...)
-			Neg => return -arguments[1]
-		end
-	else
-		@assert length(f.args) == 2 "Pow operation requires exactly two arguments."
-		res = ast2sat_smt_pow(f.args..., variables, additional, smt_cache)
+	arguments = map(x -> ast2sat(x, variables, additional, smt_cache), f.args)
+	res = @match f.operation begin
+		Add => +(arguments...)
+		Sub => -(arguments...)
+		Mul => *(arguments...)
+		Div => /(arguments...)
+		Pow => sat_smt_pow(arguments)
+		Neg => return -arguments[1]
 	end
-	
 	smt_cache[f] = res
 	return res
 end
 function ast2sat(v :: Variable, variables, additional, smt_cache)
 	return variables[v.position]
 end
-function ast2sat(n::TermNumber, variables, additional, smt_cache)	
-	x_rat = rationalize(Int32,Float32(n.value))
-	den = Satisfiability.to_int(denominator(x_rat))
-	num = Satisfiability.to_int(numerator(x_rat))
-	if occursin("e", string(den)) || occursin("e", string(num))
-		@warn "Rationalized number $(x_rat) contains scientific notation"
-		@show x_rat
-	end
-	@satvariable(t_shield, Real)
-	res = num / (den * t_shield)
-	if !any(a -> isequal(a, t_shield), additional)
-		push!(additional, t_shield == 1.0)
-	end
-	return res
-
-	#------------------------
-
-	x = Float64(n.value)
-	x_str = string(x)
-	if !occursin("e", x_str)
-		return x
-	else
-		@warn "$(x) contains scientific notation. adding shield variable."
-		@satvariable(t_shield, Real)
-		push!(additional, t_shield == 1.0)
-		parts = split(x_str, 'e')
-		coeff = parse(Float64, parts[1])
-		exponent = parse(Int, parts[2])
-		@assert exponent < 0 "Only negative exponents are supported for shield variables."
-		divisor = 10.0^(-exponent)
-		@assert !occursin(string(divisor), "e") "Shield variable divisor cannot be in scientific notation."
-		return (coeff / (divisor * t_shield))
-	end
-
-
+function secure_int(val::Integer, zero_var)
+    LIMIT = 1000000 
+    if abs(val) < LIMIT
+        return val
+    end
+    CUTOFF = 100000 
+    lower = rem(val, CUTOFF)
+    upper = div(val, CUTOFF)
+    return (secure_int(upper, zero_var) * (CUTOFF + zero_var)) + lower
 end
 
+function ast2sat(n::TermNumber, variables, additional, smt_cache)    
+    x_rat = rationalize(Int32,Float32(n.value))
+    num = numerator(x_rat)
+    den = denominator(x_rat)
+
+	@satvariable(t_zero, Real)
+    if !any(c -> isequal(c, (t_zero == 0.0)), additional)
+        push!(additional, t_zero == 0.0)
+    end
+    
+	num = secure_int(num, t_zero)
+    den = secure_int(den, t_zero)
+
+	if den == 1
+        return Satisfiability.to_real(num)
+    end
+
+	@satvariable(t_one, Real)
+    if !any(c -> isequal(c, (t_one == 1.0)), additional)
+        push!(additional, t_one == 1.0)
+    end
+    return Satisfiability.to_real(num) / (Satisfiability.to_real(den) * t_one)
+end

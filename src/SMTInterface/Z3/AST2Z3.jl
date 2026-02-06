@@ -128,7 +128,7 @@ function ast2smt(f :: Atom, variables, additional, smt_cache)
 end
 function smt_pow(ctx, arguments)
 	@assert length(arguments) == 2
-	exp = arguments[2]
+	exp = Rational{BigInt}(arguments[2])
 	if exp.den == 1
 		return ^(arguments...)
 	else
@@ -166,4 +166,33 @@ function ast2smt(n :: TermNumber, variables, additional, smt_cache)
 	#value32 = Float32(n.value)
 	#return rationalize(value32)
 	return rationalize(Int32,Float32(n.value))
+	
+	ctx = Z3.ctx(variables[1])
+	if denominator(n.value) == 1
+		return Int64(n.value)
+	end
+
+	x = Float64(n.value)
+	x_str = string(x)
+	if !occursin("e", x_str)
+		r = rationalize(x)
+		return real_val(ctx, numerator(r), denominator(r))
+	else
+		@warn "$(x) contains scientific notation. Adding Z3 shield variable."
+        t_shield = real_const(ctx, "t_shield")
+		if any(a -> a == (t_shield == real_val(ctx, 1, 1)), additional)
+			# If shield variable is already in additional, do nothing
+		else
+			push!(additional, t_shield == real_val(ctx, 1, 1)) # 1/1 (rational 1.0)
+		end
+        parts = split(x_str, 'e')
+        coeff = parse(Float64, parts[1])
+        exponent = parse(Int, parts[2])        
+        @assert exponent < 0 "Only negative exponents are supported for shield variables."
+        divisor_val = Int64(10^(-exponent))
+		z3_coeff = rationalize(coeff) # Erzeugt z.B. 1//10
+        z3_coeff = real_val(ctx, numerator(z3_coeff), denominator(z3_coeff))
+        z3_divisor = real_val(ctx, divisor_val)
+        return z3_coeff / (z3_divisor * t_shield)
+	end
 end
