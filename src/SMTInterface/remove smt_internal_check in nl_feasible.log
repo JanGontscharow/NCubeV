@@ -1,0 +1,327 @@
+    Testing Running tests...
+[CMD] Using SMT solver: Z3
+[CMD] Using verifier: NNEnum
+[CMD] Parsed initial query: NCubeV.AST.Query(((-1.0*x1<0.0&((-1//1*rPos)+(1//200*(rVel^2//1)))<=0//1&-1.0*x1<=0.0&1.0*x1<=100.0&-1.0*x2<=200.0&1.0*x2<=200.0&-1.0*x3<=100.0&1.0*x3<=100.0)->(-1.0*x3<=-100.0|(-1.0*x3<=100.0&1.0*x3<100.0&(1.0*x3<0.0|-1.0*x3<0.0)&((((-1.0*x3<0.0&1.0*x20.1*x3<0.0)|(1.0*x3<0.0&-1.0*x2-0.1*x3<0.0)|(-1.0*x3<0.0&-1.0*x2<0.0)|(1.0*x3<0.0&1.0*x2<0.0))&((-1//200*rAccpost)+(-1//10*rVel)+(-1//1*rPos)+(1//20000*(rAccpost^2//1))+(1//200*(rVel^2//1))+(1//1000*rAccpost*rVel))<0//1)|(((-1//200*rAccpost)+(-1//10*rVel)+(-1//1*rPos)+(1//20000*(rAccpost^2//1))+(1//200*(rVel^2//1))+(1//1000*rAccpost*rVel))<0//1&((-2.0*x3<0.0&((rVel^2//1)+(-2//1*rAccpost*rPos))<0//1)|(2.0*x3<0.0&((-1//1*(rVel^2//1))+(2//1*rAccpost*rPos))<0//1)))))|(1.0*x3<=0.0&-1.0*x3<=0.0&((-1//10*rVel)+(-1//1*rPos)+(1//200*(rVel^2//1)))<0//1))), Set(NCubeV.AST.Variable[rAccpost, rVel, rPos]), 2, 1, Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}(), Vector{Float64}[])
+[CMD] SMT Timeout: 10s
+[CTRL] Iterating over conjunctions...
+[APPROX] Trying to build approximation...
+[APPROX] Generating expression for (rVel^2//1)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rVel)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost^2//1)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rPos)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.00100708007812, 100.00100708007812], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Approximation Bounds: Vector{Float64}[]
+[APPROX] Approximations: Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}()
+[APPROX] Approximation is ready
+[SKELETON] Adding linear dependency constraint
+Float32[-1.0, 0.0, 0.0]+0.0<0//1 -> -1.0*x1<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=-100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+-100.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+100.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -1.0*x3<=100.0
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<100.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -1.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<0.0 -> Float32[0.0, -1.0, 0.0]+0.0<=200//1
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x2<0.0 -> Float32[0.0, 1.0, 0.0]+0.0<=200//1
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-2.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=90463474342350444207441578686357808384647279191786890972732795768557194352525//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+nl_feasible
+SAT: Test Failed at /home/jango/projects/NCubeV/test/integration/main.jl:14
+  Expression: cex_count == 88
+   Evaluated: 0 == 88
+
+Stacktrace:
+ [1] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:672 [inlined]
+ [2] macro expansion
+   @ ~/projects/NCubeV/test/integration/main.jl:14 [inlined]
+ [3] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:1577 [inlined]
+ [4] macro expansion
+   @ ~/projects/NCubeV/test/integration/main.jl:4 [inlined]
+ [5] macro expansion
+   @ /opt/julia-1.10.5/share/julia/stdlib/v1.10/Test/src/Test.jl:1577 [inlined]
+ [6] top-level scope
+   @ ~/projects/NCubeV/test/integration/main.jl:3
+[CMD] Using SMT solver: Z3
+[CMD] Using verifier: NNEnum
+[CMD] Parsed initial query: NCubeV.AST.Query(((-1.0*x1<0.0&((-1//1*rPos)+(1//200*(rVel^2//1)))<=0//1&-1.0*x1<=0.0&1.0*x1<=100.0&-1.0*x2<=200.0&1.0*x2<=200.0&-1.0*x3<=100.0&1.0*x3<=100.01&(-1.0*x2<-0.1|1.0*x2<-2.1|-1.0*x1<-0.08))->(-1.0*x3<=-100.0|(-1.0*x3<=100.0&1.0*x3<100.0&(1.0*x3<0.0|-1.0*x3<0.0)&((((-1.0*x3<0.0&1.0*x20.1*x3<0.0)|(1.0*x3<0.0&-1.0*x2-0.1*x3<0.0)|(-1.0*x3<0.0&-1.0*x2<0.0)|(1.0*x3<0.0&1.0*x2<0.0))&((-1//200*rAccpost)+(-1//10*rVel)+(-1//1*rPos)+(1//20000*(rAccpost^2//1))+(1//200*(rVel^2//1))+(1//1000*rAccpost*rVel))<0//1)|(((-1//200*rAccpost)+(-1//10*rVel)+(-1//1*rPos)+(1//20000*(rAccpost^2//1))+(1//200*(rVel^2//1))+(1//1000*rAccpost*rVel))<0//1&((-2.0*x3<0.0&((rVel^2//1)+(-2//1*rAccpost*rPos))<0//1)|(2.0*x3<0.0&((-1//1*(rVel^2//1))+(2//1*rAccpost*rPos))<0//1)))))|(1.0*x3<=0.0&-1.0*x3<=0.0&((-1//10*rVel)+(-1//1*rPos)+(1//200*(rVel^2//1)))<0//1))), Set(NCubeV.AST.Variable[rAccpost, rVel, rPos]), 2, 1, Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}(), Vector{Float64}[])
+[CMD] SMT Timeout: 10s
+[CTRL] Iterating over conjunctions...
+[APPROX] Trying to build approximation...
+[APPROX] Generating expression for (rVel^2//1)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rVel)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost^2//1)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Generating expression for (rAccpost*rPos)...
+Val Ranges: Dict(:x2 => [-200.0, 200.0], :x3 => [-100.0, 100.01000213623047], :x1 => [0.0, 100.0])
+Using N=1, ϵ=0.0, rel_error_tol=0.005
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Skipping verification of approximation (switch on using NCubeV.Config.set_rigorous_approximations(true))
+[APPROX] Approximation Bounds: Vector{Float64}[]
+[APPROX] Approximations: Dict{NCubeV.AST.ApproxQuery, NCubeV.AST.Approximation}()
+[APPROX] Approximation is ready
+[SKELETON] Adding linear dependency constraint
+Float32[-1.0, 0.0, 0.0]+0.0<0//1 -> -1.0*x1<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<-0.1 -> Float32[0.0, -1.0, 0.0]+0.0<=200//1
+-0.1000000000000000000000000000000000000000000000000000000000000000000000000000002
+[SKELETON] Adding linear dependency constraint
+1.0*x2<-2.1 -> Float32[0.0, 1.0, 0.0]+0.0<=200//1
+-2.100000000000000000000000000000000000000000000000000000000000000000000000000021
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<-2.1 | !Float32[0.0, -1.0, 0.0]+0.0<-92633671389852956338856788006950326282615987732512451231566067206330503711949//926336713898529563388567880069503262826159877325124512315660672063305037119488
+[SKELETON] Adding linear dependency constraint
+-1.0*x1<-0.08 -> Float32[-1.0, 0.0, 0.0]+0.0<0//1
+-0.08000000000000000000000000000000000000000000000000000000000000000000000000000104
+[SKELETON] Adding linear dependency constraint
+-1.0*x1<-0.08 -> Float32[-1.0, 0.0, 0.0]+0.0<=0//1
+-0.08000000000000000000000000000000000000000000000000000000000000000000000000000104
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=-100.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+-100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<100.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90471615973624943002432298521241231753168212237583693824891820129932750744453//904625697166532776746648320380374280103671755200316906558262375061821325312
+100.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90471615973624943002432298521241231753168212237583693824891820129932750744453//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -1.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x2<0.0 -> Float32[0.0, -1.0, 0.0]+0.0<=200//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, -1.0, 0.0]+0.0<-92633671389852956338856788006950326282615987732512451231566067206330503711949//926336713898529563388567880069503262826159877325124512315660672063305037119488 -> -1.0*x2<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x2<0.0 | !Float32[0.0, 1.0, 0.0]+0.0<-60790846849591002597374767129561151622966741949461296120715231604154393060967//28948022309329048855892746252171976963317496166410141009864396001978282409984
+[SKELETON] Adding linear dependency constraint
+1.0*x2<0.0 -> Float32[0.0, 1.0, 0.0]+0.0<=200//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 1.0, 0.0]+0.0<-60790846849591002597374767129561151622966741949461296120715231604154393060967//28948022309329048855892746252171976963317496166410141009864396001978282409984 -> 1.0*x2<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<-92633671389852956338856788006950326282615987732512451231566067206330503711949//926336713898529563388567880069503262826159877325124512315660672063305037119488
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x2<0.0 | !Float32[0.0, -1.0, 0.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-2.0*x3<0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-2.0*x3<0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90471615973624943002432298521241231753168212237583693824891820129932750744453//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+2.0*x3<0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 2.0*x3<0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!2.0*x3<0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<=90471615973624943002432298521241231753168212237583693824891820129932750744453//904625697166532776746648320380374280103671755200316906558262375061821325312
+0.0
+[SKELETON] Adding linear dependency constraint
+1.0*x3<=0.0 -> Float32[0.0, 0.0, 1.0]+0.0<100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, 1.0]+0.0<0//1 -> 1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<=-100//1
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!1.0*x3<=0.0 | !Float32[0.0, 0.0, -1.0]+0.0<0//1
+[SKELETON] Adding linear dependency constraint
+-1.0*x3<=0.0 -> Float32[0.0, 0.0, -1.0]+0.0<=100//1
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<=-100//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding linear dependency constraint
+Float32[0.0, 0.0, -1.0]+0.0<0//1 -> -1.0*x3<=0.0
+0.0
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+[SKELETON] Adding negated linear dependency constraint
+!-1.0*x3<=0.0 | !Float32[0.0, 0.0, 1.0]+0.0<0//1
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+lin_feasible
+nl_feasible
+Test Summary:     | Pass  Fail  Total     Time
+Integration Tests |    1     1      2  2m03.7s
+  SAT             |          1      1  1m54.8s
+  UNSAT           |    1            1     8.9s
+ERROR: LoadError: Some tests did not pass: 1 passed, 1 failed, 0 errored, 0 broken.
+in expression starting at /home/jango/projects/NCubeV/test/integration/main.jl:2
+in expression starting at /home/jango/projects/NCubeV/test/runtests.jl:4
+ERROR: Package NCubeV errored during testing
+
+(NCubeV) pkg> 

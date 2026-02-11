@@ -286,6 +286,11 @@ end
 function ast2sat(v :: Variable, variables, additional, smt_cache)
 	return variables[v.position]
 end
+
+# rewrites val using "Horner-Schema with basis 100000"
+# this avoids numbers ≥ 1000000 in the expression  
+# which avoids unknown Symbol error in the Solver
+# the zero_var is introduced to avoid simplification by Satisfiability
 function secure_int(val::Integer, zero_var)
     LIMIT = 1000000 
     if abs(val) < LIMIT
@@ -298,7 +303,8 @@ function secure_int(val::Integer, zero_var)
 end
 
 function ast2sat(n::TermNumber, variables, additional, smt_cache)    
-    x_rat = rationalize(Int32,Float32(n.value))
+    # same value as the Z3 implementation
+	x_rat = rationalize(Int32,Float32(n.value))
     num = numerator(x_rat)
     den = denominator(x_rat)
 
